@@ -1,18 +1,20 @@
 import './Todo.css'
+import { useState } from 'react'
 import TodoList from '../todo-list/TodoList'
 import TodoCreate from '../todo-create/TodoCreate'
 
 // component Todo menggunakan function
 const Todo = () => {
-    const todos = [
+    // menggunakan state pada react
+    const [getTodos, setTodos] = useState([
         { id: 1, title: 'Eat' }, // data array yg merupakan object
         { id: 2, title: 'Sleep' },
-        { id: 3, title: 'Code' }
-    ]
+        { id: 3, title: 'Code' },
+    ])
 
     const eventCreateTodo = (todo) => {
-        todos.push(todo)
-        console.log(todos);
+        setTodos(getTodos.concat(todo))
+        console.log(getTodos);
     }
 
     return (
@@ -21,7 +23,7 @@ const Todo = () => {
             {/* props yg berbentuk fungsi sebaiknya diawali dg 'on' */}
             <TodoCreate onCreateTodo = {eventCreateTodo}/>
             {/* dataTodos berkaitan dengan props begitu juga dgn onCreateTodo*/}
-            <TodoList dataTodos = {todos} />
+            <TodoList dataTodos = {getTodos} />
         </div>
     )
 }
